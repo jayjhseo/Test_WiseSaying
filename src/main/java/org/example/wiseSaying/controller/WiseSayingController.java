@@ -10,7 +10,10 @@ public class WiseSayingController {
 
 
     public void write() {
-
+        if(Container.getLoginedMember() == null) {
+            System.out.println("로그인 후 이용해주세요");
+            return;
+        }
         System.out.print("명언: ");
         String content = Container.getSc().nextLine().trim();
         System.out.print("작가: ");
@@ -26,19 +29,27 @@ public class WiseSayingController {
     }
 
     public void remove() {
+        if(Container.getLoginedMember() == null) {
+            System.out.println("로그인 후 이용해주세요");
+            return;
+        }
         System.out.println("삭제할 명언의 ID값을 입력하세요");
         long id = Long.parseLong(Container.getSc().nextLine().trim());
         WiseSaying wiseSaying = wiseSayingService.getWiseSayingsById(id);
 
         if (wiseSaying == null) {
-            System.out.printf("%d번명언이 존재하지 않습니다.\n", id);
+            System.out.printf("%d번 명언이 존재하지 않습니다.\n", id);
             return;
         }
         wiseSayingService.remove(wiseSaying);
-        System.out.printf("%d번명언이 삭제되었습니다.\n", id);
+        System.out.printf("%d번 명언이 삭제되었습니다.\n", id);
     }
 
     public void modify() {
+        if(Container.getLoginedMember() == null) {
+            System.out.println("로그인 후 이용해주세요");
+            return;
+        }
         System.out.println("수정할 명언의 ID값을 입력하세요");
         long id = Long.parseLong(Container.getSc().nextLine().trim());
         WiseSaying wiseSaying = wiseSayingService.getWiseSayingsById(id);
