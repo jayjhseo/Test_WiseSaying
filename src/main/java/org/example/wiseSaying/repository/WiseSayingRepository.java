@@ -1,14 +1,22 @@
 package org.example.wiseSaying.repository;
 
+import org.example.Container;
+import org.example.db.DBConnection;
 import org.example.wiseSaying.entity.WiseSaying;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class WiseSayingRepository {
-    List<WiseSaying> wiseSayings = new ArrayList<>();
+    private List<WiseSaying> wiseSayings;
     long lastId = 0;
+    private DBConnection dbConnection;
 
+    public WiseSayingRepository () {
+        dbConnection = Container.getDBconnection();
+        wiseSayings = new ArrayList<>();
+    }
     public long create(String author, String content) {
         lastId++;
         WiseSaying wiseSaying = new WiseSaying(lastId, author, content);
@@ -16,13 +24,14 @@ public class WiseSayingRepository {
         return lastId;
     }
     public void getAllList() {
-        if (wiseSayings.size() == 0) {
-            System.out.println("명언이 존재하지 않습니다.");
-            return;
-        }
-        for (int i = 0; i < wiseSayings.size(); i++) {
-            WiseSaying wiseSaying = wiseSayings.get(i);
-            System.out.printf("%d, %s, %s\n", wiseSaying.getId(), wiseSaying.getAuthor(), wiseSaying.getContent());
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(String.format("SELECT * FROM wiseSaying"));
+
+        List<Map<String, Object>> rows = dbConnection.selectRows(sb.toString());
+
+        for (Map<String, Object> row : rows) {
+            wiseSayings.add(new WiseSaying(row));
         }
     }
     public void remove(WiseSaying wiseSaying) {

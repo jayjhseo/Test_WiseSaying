@@ -7,6 +7,7 @@ import org.example.system.controller.SystemController;
 import org.example.wiseSaying.controller.WiseSayingController;
 import org.example.wiseSaying.entity.WiseSaying;
 
+import java.rmi.ConnectException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +23,8 @@ public class App {
         DBConnection.DB_PASSWORD = "";
         DBConnection.DB_PORT = 3306;
 
-        Container.getDBconnection().connect();
+
+            Container.getDBconnection().connect();
 
 //        Container.getDBconnection().insert("INSERT INTO wiseSaying \n" +
 //                "SET id = 3,\n" +
