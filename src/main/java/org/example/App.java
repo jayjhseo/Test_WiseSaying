@@ -17,36 +17,32 @@ public class App {
     MemberController memberController = new MemberController();
     DBConnection dbConnection = new DBConnection();
     public App () {
-        DBConnection.DB_NAME = "proj1";
+        DBConnection.DB_NAME = "proj2";
         DBConnection.DB_USER = "root";
         DBConnection.DB_PASSWORD = "";
         DBConnection.DB_PORT = 3306;
 
         Container.getDBconnection().connect();
-        Container.getDBconnection().
-//        Container.getDBconnection().insert(
-//                "INSERT INTO article " +
+
+//        Container.getDBconnection().insert("INSERT INTO wiseSaying \n" +
 //                "SET id = 3,\n" +
-//                "title = \"test3\",\n" +
-//                "content = \"test3\",\n" +
-//                "memberId = 1,\n" +
-//                "regDate = now()");
+//                "author = \"test3\",\n" +
+//                "content = \"test3\";");
 //        Container.getDBconnection().delete(
 //                "DELETE FROM article"
 //        );
 
-//        StringBuilder sb = new StringBuilder();
-//        sb.append(String.format("SELECT * FROM article"));
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("SELECT * FROM wiseSaying"));
 
-//        List<WiseSaying> wiseSayings =  new ArrayList<>();
-//
-//        List<Map<String, Object>> rows = Container.getDBconnection().selectRows(sb.toString());
-//
-//        for (Map<String, Object> row : rows) {
-//            System.out.println(row);
-//        }
+        List<WiseSaying> wiseSayings = new ArrayList<>();
+
+        List<Map<String, Object>> rows = Container.getDBconnection().selectRows(sb.toString());
+
+        for (Map<String, Object> row : rows) {
+            System.out.println(row);
+        }
     }
-
 
 
     public void run() {

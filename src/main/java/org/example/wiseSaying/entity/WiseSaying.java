@@ -14,10 +14,10 @@ public class WiseSaying {
     String author;
     String content;
 
-    public WiseSaying (Map<String, Object> row) {
-        this.id = 1; // 테스트 값
-        this.author = (String) row.get("title");
-        this.content = (String) row.get("content");
-        // 테스트 값
-    }
+//    public WiseSaying (Map<String, Object> row) {
+//        this.id = 1; // 테스트 값
+//        this.author = (String) row.get("title");
+//        this.content = (String) row.get("content");
+//        // 테스트 값
+//    }
 }
